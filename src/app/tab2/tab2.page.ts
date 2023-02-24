@@ -19,11 +19,11 @@ export class Tab2Page {
 
   constructor(private formBuilder: FormBuilder) {
     this.teethTime = this.formBuilder.group({
-      name: ['', Validators.required],
-      time: [0, Validators.required],
-      zoneTeeth: ['', Validators.required],
-      zoneTeethTime: [0, Validators.required],
-      timeRepos: [0, Validators.required],
+      name: ['Simplon App', Validators.required],
+      time: [10, Validators.required],
+      zoneTeeth: [4, Validators.required],
+      zoneTeethTime: [10, Validators.required],
+      timeRepos: [10, Validators.required],
     });
   }
 
@@ -48,11 +48,5 @@ export class Tab2Page {
       key: 'timeRepos',
       value: this.teethTime.get('timeRepos')?.value,
     });
-    console.log(
-      'button form ' +
-        Preferences.get({ key: 'name' }) +
-        ' ' +
-        Preferences.get({ key: 'zoneBrush' })
-    );
   }
 }

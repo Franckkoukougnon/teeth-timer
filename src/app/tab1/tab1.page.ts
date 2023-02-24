@@ -19,8 +19,12 @@ export class Tab1Page {
   timeRepos: string = '';
   timer: any;
   timerBreak: any;
+  teethMinute: number = 0;
+  teethTimeBreak: number = 0;
+  teethTimeZone: number = 0;
+  nbreZoneTeeth: number = 0;
 
-  constructor(private teethService: DataTeethService) {}
+  constructor() {}
 
   async ionViewWillEnter() {
     this.name = (await Preferences.get({ key: 'name' })).value!;
@@ -34,25 +38,23 @@ export class Tab1Page {
 
   ngOnInit(): void {}
 
-  teethMinute = parseInt(this.time);
-  teethTimeBreak = parseInt(this.timeRepos);
-
-  teethTimeZone = parseInt(this.zoneTeethTime);
-
-  nbreZoneTeeth = parseInt(this.zoneTeeth);
-
   start() {
+    this.teethMinute = parseInt(this.time);
+    this.teethTimeBreak = parseInt(this.timeRepos);
+    this.teethTimeZone = parseInt(this.zoneTeethTime);
+    this.nbreZoneTeeth = parseInt(this.zoneTeeth);
+
     if (!this.isRunning) {
       this.isRunning = true;
       this.timer = setInterval(() => {
         this.seconds++;
-        if (this.seconds === 60) {
-          this.minutes++;
+        console.log(this.seconds + ' / ' + this.teethTimeBreak);
+        if (this.seconds == this.teethTimeBreak) {
+          console.log(this.nbreZoneTeeth);
+          console.log(this.zoneTeeth);
+          this.getTimeBreak();
           this.seconds = 0;
-        } else if (this.minutes === this.teethMinute) {
-          this.teethMinute = 0;
-          this.nbreZoneTeeth--;
-          this.isRunning = false;
+          clearInterval(this.timer);
         }
       }, 1000);
     }
@@ -69,6 +71,17 @@ export class Tab1Page {
     this.minutes = 0;
     this.seconds = 0;
     this.isRunning = false;
-    clearInterval(this.timer);
+  }
+
+  getTimeBreak() {
+    this.teethMinute = parseInt(this.time);
+    this.teethTimeBreak = parseInt(this.timeRepos);
+    this.teethTimeZone = parseInt(this.zoneTeethTime);
+    this.nbreZoneTeeth = parseInt(this.zoneTeeth);
+
+    if (this.seconds == this.teethTimeBreak) {
+      this.nbreZoneTeeth--;
+      clearInterval(this.timer);
+    }
   }
 }
