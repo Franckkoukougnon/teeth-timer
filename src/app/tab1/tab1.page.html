@@ -1,17 +1,55 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Timer
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="timer_image">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-content size="large">Tab 1</ion-content>
     </ion-toolbar>
   </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-card>
+    <div class="card-button">
+      <ion-card-header>
+        <ion-chip>
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>Ce Message pour :{{name}}</ion-label>
+          <ion-icon name="close-circle"></ion-icon>
+        </ion-chip>
+      </ion-card-header>
+    </div>
+    <div class="card-button">
+      <ion-card-content>
+        <span class="time_teeth"> {{ minutes }}:{{ seconds | number: '2.0' }}</span>
+      </ion-card-content>
+    </div>
+  </ion-card>
+  <div class="button-container">
+    <ion-button fill="outline" size="default" (click)="pause()" [disabled]="!isRunning">Pause</ion-button>
+    <ion-button fill="outline" size="default" (click)="start()" [disabled]="isRunning">Start</ion-button>
+    <ion-button fill="outline" size="default" (click)="reset()" [disabled]="isRunning">Reset</ion-button>
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-label>Temps de brossage </ion-label>
+      <ion-badge color="secondary" class="timeBrush">{{time}} mn </ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label>Temps de repos en mn:</ion-label>
+      <ion-card-content>{{timeRepos}}</ion-card-content>
+    </ion-item>
+    <ion-item>
+      <ion-label>Temps de brossage par zone :</ion-label>
+      <ion-card-content>{{zoneTeethTime}}</ion-card-content>
+    </ion-item>
+    <ion-item>
+      <ion-label>nombre de zone a brosser : :</ion-label>
+      <ion-card-content>{{zoneTeeth}}</ion-card-content>
+    </ion-item>
+  </ion-list>
 </ion-content>

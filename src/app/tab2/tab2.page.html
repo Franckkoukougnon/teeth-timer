@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Paramètre
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,31 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+
     </ion-toolbar>
   </ion-header>
+  <form [formGroup]="teethTime" (ngSubmit)="teethTimeForm()">
+    <ion-item>
+      <ion-label>Name :</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Temps de Brossage en ms:</ion-label>
+      <ion-textarea formControlName="time"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>Durée par Zone en ms</ion-label>
+      <ion-textarea formControlName="zoneTeethTime"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>Temps de repos en ms: </ion-label>
+      <ion-textarea formControlName="timeRepos"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nbre de Zone de Brossage: </ion-label>
+      <ion-textarea formControlName="zoneTeeth"></ion-textarea>
+    </ion-item>
+    <ion-button type="submit" (click)=" teethTimeForm()" [disabled]="!teethTime.valid">Submit </ion-button>
+  </form>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
 </ion-content>
